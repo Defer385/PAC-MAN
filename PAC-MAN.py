@@ -1,4 +1,7 @@
 import pygame
+import pac_man_object
+
+
 
 pygame.init()
 
@@ -12,15 +15,11 @@ WHITE = "#FFFFFF"
 
 screen = pygame.display.set_mode((width,height))
 pygame.display.set_caption(game_name)
-pac = pygame.image.load('pac-man.png')
-pac_rect = pygame.Rect(0, 0, 64, 64)
-
+pac_man = pac_man_object.Pacman()
 
 clock = pygame.time.Clock()
 
-speed = 10
-sprite_frame = 0
-sprite_frame_time = 0
+
 
 run = True
 while run:
@@ -30,34 +29,28 @@ while run:
             run = False
     key = pygame.key.get_pressed()
     if key[pygame.K_LEFT]:
-        pac_rect.x -= speed
+        pac_man.rect.x -= pac_man.speed
     if key[pygame.K_RIGHT]:
-        pac_rect.x += speed
+        pac_man.rect.x += pac_man.speed
     if key[pygame.K_UP]:
-        pac_rect.y -= speed
+        pac_man.rect.y -= pac_man.speed
     if key [pygame.K_DOWN]:
-        pac_rect.y += speed
+        pac_man.rect.y += pac_man.speed
 
 #Колизия
-    if pac_rect.bottom > height:
-        pac_rect.y = height - pac_rect.height
-    if pac_rect.top < 0:
-        pac_rect.y = 0
-    if pac_rect.left < 0:
-        pac_rect.x = 0
-    if pac_rect.right > width:
-        pac_rect.x = width - pac_rect.width
+    if pac_man.rect.bottom > height:
+        pac_man.rect.y = height - pac_man.rect.height
+    if pac_man.rect.top < 0:
+        pac_man.rect.y = 0
+    if pac_man.rect.left < 0:
+        pac_man.rect.x = 0
+    if pac_man.rect.right > width:
+        pac_man.rect.x = width - pac_man.rect.width
 
     screen.fill(WHITE)
-    screen.blit(pac, pac_rect, pygame.Rect(64*sprite_frame,0,64,64))
+    screen.blit(pac_man.image, pac_man.rect, pygame.Rect(64*pac_man.sprite_frame,0,64,64))
 
-#Анимация
-    sprite_frame_time += 1      #Таймер
-    if sprite_frame_time > 10:  #Условия для изменение спрайта
-        sprite_frame += 1
-        sprite_frame_time = 0
-    if sprite_frame == 4:       #Для цикличности анимации
-        sprite_frame = 0
+    pac_man.update()
 
     pygame.display.update()
     clock.tick(fps)
