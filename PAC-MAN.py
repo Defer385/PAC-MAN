@@ -49,13 +49,14 @@ while run:
         pac_rect.x = width - pac_rect.width
 
     screen.fill(WHITE)
-    screen.blit(pac, pac_rect, pygame.Rect(12*sprite_frame,0,12,12))
+    screen.blit(pac, pac_rect, pygame.Rect(64*sprite_frame,0,64,64))
 
-    sprite_frame_time += 1
-    if sprite_frame_time > 60:
+#Анимация
+    sprite_frame_time += 1      #Таймер
+    if sprite_frame_time > 10:  #Условия для изменение спрайта
         sprite_frame += 1
         sprite_frame_time = 0
-    if sprite_frame == 5:
+    if sprite_frame == 4:       #Для цикличности анимации
         sprite_frame = 0
 
     pygame.display.update()
