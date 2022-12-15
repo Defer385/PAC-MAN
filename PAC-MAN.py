@@ -30,12 +30,16 @@ while run:
     key = pygame.key.get_pressed()
     if key[pygame.K_LEFT]:
         pac_man.rect.x -= pac_man.speed
+        pac_man.sprite_frame_time += 1 # <<<---- Таймер
     if key[pygame.K_RIGHT]:
         pac_man.rect.x += pac_man.speed
+        pac_man.sprite_frame_time += 1 # <<<---- Таймер
     if key[pygame.K_UP]:
         pac_man.rect.y -= pac_man.speed
+        pac_man.sprite_frame_time += 1 # <<<---- Таймер
     if key [pygame.K_DOWN]:
         pac_man.rect.y += pac_man.speed
+        pac_man.sprite_frame_time += 1  # <<<---- Таймер
 
 #Колизия
     if pac_man.rect.bottom > height:

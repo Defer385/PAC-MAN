@@ -14,8 +14,7 @@ class Pacman:
 
     def update (self):
         #Анимация
-        self.sprite_frame_time += 1      #Таймер
-        if self.sprite_frame_time > 10:  #Условия для изменение спрайта
+        if self.sprite_frame_time > 5:  #Условия для изменение спрайта
             self.sprite_frame += 1
             self.sprite_frame_time = 0
         if self.sprite_frame == 4:       #Для цикличности анимации
