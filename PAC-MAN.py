@@ -31,15 +31,19 @@ while run:
     if key[pygame.K_LEFT]:
         pac_man.rect.x -= pac_man.speed
         pac_man.sprite_frame_time += 1 # <<<---- Таймер
+        pac_man.sprite_frame_sides = 1
     if key[pygame.K_RIGHT]:
         pac_man.rect.x += pac_man.speed
         pac_man.sprite_frame_time += 1 # <<<---- Таймер
+        pac_man.sprite_frame_sides = 2
     if key[pygame.K_UP]:
         pac_man.rect.y -= pac_man.speed
         pac_man.sprite_frame_time += 1 # <<<---- Таймер
+        pac_man.sprite_frame_sides = 3
     if key [pygame.K_DOWN]:
         pac_man.rect.y += pac_man.speed
-        pac_man.sprite_frame_time += 1  # <<<---- Таймер
+        pac_man.sprite_frame_time += 1 # <<<---- Таймер
+        pac_man.sprite_frame_sides = 4
 
 #Колизия
     if pac_man.rect.bottom > height:
@@ -51,8 +55,23 @@ while run:
     if pac_man.rect.right > width:
         pac_man.rect.x = width - pac_man.rect.width
 
+#Условия для работы анимации
+    if pac_man.sprite_frame_sides == 1:
+        pac_man.pixel_for_animation = 64    #<<<--- Право
+
+    if pac_man.sprite_frame_sides == 2:
+        pac_man.pixel_for_animation = 0     #<<<--- Леов
+
+    if pac_man.sprite_frame_sides == 3:
+       pac_man.pixel_for_animation = 128    #<<<--- Вверх
+
+    if pac_man.sprite_frame_sides == 4:
+       pac_man.pixel_for_animation = 192    #<<<--- Вниз
+        
+
+
     screen.fill(WHITE)
-    screen.blit(pac_man.image, pac_man.rect, pygame.Rect(64*pac_man.sprite_frame,0,64,64))
+    screen.blit(pac_man.image, pac_man.rect, pygame.Rect(64*pac_man.sprite_frame,pac_man.pixel_for_animation,64,64))
 
     pac_man.update()
 

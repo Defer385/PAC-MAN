@@ -5,6 +5,8 @@ class Pacman:
     sprite_frame_time = 0
     sprite_frame = 0
     speed = 10
+    sprite_frame_sides = 0
+    pixel_for_animation = 0
     image = None
     def __init__ (self):
         self.x = 10
