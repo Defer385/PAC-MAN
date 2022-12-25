@@ -1,6 +1,8 @@
 import pygame
 import pac_man_object
-
+import point_object
+import utils
+import random
 
 
 pygame.init()
@@ -9,8 +11,19 @@ pygame.init()
 width = 1366
 height = 768
 fps = 60
+score = 0
 game_name = "Игра"
-WHITE = "#FFFFFF"
+BLACK = "#000000"
+WHITE = "#hhhhhh"
+
+
+def draw_text(screen,text,size,x,y,color):
+    font_name = pygame.font.match_font('arial')
+    font = pygame.font.Font(font_name, size)
+    text_image = font.render(text, True, color)
+    text_rect = text_image.get_rect()
+    text_rect.center = (x,y)
+    screen.blit(text_image, text_rect)
 
 
 screen = pygame.display.set_mode((width,height))
@@ -19,6 +32,12 @@ pac_man = pac_man_object.Pacman()
 
 clock = pygame.time.Clock()
 
+point_list = []
+
+
+for i in range(5):
+    point = point_object.point(random.randint(0,width), random.randint(0,height))
+    point_list.append(point)
 
 
 run = True
@@ -60,18 +79,32 @@ while run:
         pac_man.pixel_for_animation = 64    #<<<--- Право
 
     if pac_man.sprite_frame_sides == 2:
-        pac_man.pixel_for_animation = 0     #<<<--- Леов
+        pac_man.pixel_for_animation = 0     #<<<--- Лево
 
     if pac_man.sprite_frame_sides == 3:
        pac_man.pixel_for_animation = 128    #<<<--- Вверх
 
     if pac_man.sprite_frame_sides == 4:
        pac_man.pixel_for_animation = 192    #<<<--- Вниз
-        
 
 
-    screen.fill(WHITE)
+#Колизия для точки
+#    if pac_man.rect.colliderect(point.rect):
+#        pac_man.rect.y -= pac_man.speed
+#        pac_man.rect.x -= pac_man.speed
+
+    screen.fill(BLACK)
     screen.blit(pac_man.image, pac_man.rect, pygame.Rect(64*pac_man.sprite_frame,pac_man.pixel_for_animation,64,64))
+    draw_text(screen, str(score), 30, width//2, 30, WHITE)
+
+    for i in range(5):
+        point = point_list[i]
+        if utils.intersect(pac_man.rect, point.rect.x, point.rect.y):
+            point.is_eaten = True
+            score += 1
+        if point.is_eaten == False:
+            screen.blit(point.image, point.rect)
+    
 
     pac_man.update()
 
