@@ -18,7 +18,6 @@ def intersect_cube(rect: pygame.Rect, rect1: pygame.Rect):
     y11 = rect1.y
     y21 = rect1.y + rect1.h
     if (((x1>x11 and x1 < x21)  or  (x2>x11 and x2 < x21))    and    ((y1>y11 and y1<y21)  or  (y2>y11 and y2<y21))):
-        print('Сработала колизия!')
         return True
     else:
         return False

@@ -59,7 +59,7 @@ while run:
         pac_man.sprite_frame_time += 1 # <<<---- Таймер
         pac_man.sprite_frame_sides = 4
 
-#Колизия
+#Колизия экрана
     if pac_man.rect.bottom > height:
         pac_man.rect.y = height - pac_man.rect.height
     if pac_man.rect.top < 0:
@@ -85,7 +85,7 @@ while run:
 
     screen.fill(BLACK)
 
-
+#Создание точек и их колизия
     for i in range(5):
         point = point_list[i]
         if utils.intersect_point(pac_man.rect, point.rect.x, point.rect.y):
@@ -93,9 +93,14 @@ while run:
         if point.is_eaten == False:
             screen.blit(point.image, point.rect)
 
+#Создание кипичей
     for i in range(5):
         brick = brick_list[i]
         screen.blit(brick.image, brick.rect)
+
+#Проверка работы колизии пак-мана и кипича
+    if utils.intersect_cube(pac_man.rect, brick.rect):
+        print('d')
 
 
     screen.blit(pac_man.image, pac_man.rect, pygame.Rect(64*pac_man.sprite_frame,pac_man.pixel_for_animation,64,64))
