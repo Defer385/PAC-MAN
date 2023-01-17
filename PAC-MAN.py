@@ -98,9 +98,19 @@ while run:
         brick = brick_list[i]
         screen.blit(brick.image, brick.rect)
 
-#Проверка работы колизии пак-мана и кипича
-    if utils.intersect_cube(pac_man.rect, brick.rect):
-        print('d')
+#Колизия пак-мана и кирпича
+    for i in range(5):
+        brick = brick_list[i]
+        if utils.intersect_cube(pac_man.rect, brick.rect) and key[pygame.K_RIGHT]:
+           pac_man.rect.x -= pac_man.speed
+        if utils.intersect_cube(pac_man.rect, brick.rect) and key[pygame.K_LEFT]:
+            pac_man.rect.x += pac_man.speed
+        if utils.intersect_cube(pac_man.rect, brick.rect) and key[pygame.K_UP]:
+            pac_man.rect.y += pac_man.speed
+        if utils.intersect_cube(pac_man.rect, brick.rect) and key[pygame.K_DOWN]:
+            pac_man.rect.y -= pac_man.speed
+
+
 
 
     screen.blit(pac_man.image, pac_man.rect, pygame.Rect(64*pac_man.sprite_frame,pac_man.pixel_for_animation,64,64))
