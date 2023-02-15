@@ -7,7 +7,8 @@ def intersect_point(rect: pygame.Rect, x, y):
     else:
         return False
 
-def intersect_cube(rect: pygame.Rect, rect1: pygame.Rect):
+
+def intersect_rect(rect: pygame.Rect, rect1: pygame.Rect):
     x1 = rect.x
     x11 = rect1.x
     x2 = rect.x + rect.w

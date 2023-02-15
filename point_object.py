@@ -1,6 +1,5 @@
 import pygame
 
-
 class point:
     image = None
     rect = None
