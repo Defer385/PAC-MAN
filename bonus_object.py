@@ -6,4 +6,4 @@ class bonus:
     is_eaten = False
     def __init__(self, x, y):
         self.image = pygame.image.load('Bonus.png')
-        self.rect = pygame.Rect(x, y, 64, 64)
+        self.rect = pygame.Rect(x, y, 16, 16)
